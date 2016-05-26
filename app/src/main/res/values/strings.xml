@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">myLoginTest60</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="loginbutton_hint">Login</string>
+    <string name="signup_label_hint">Sign Up!</string>
+    <string name="email_hint">Email</string>
+    <string name="signup_error_message">Please make sure you enter a username, password and email address!</string>
+    <string name="signup_error_title">Oops!</string>
+    <string name="login_error_message">Please make sure you enter a username and password!</string>
+    <string name="login_error_title">Oops!</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_logout_label">Logout</string>
+    <string name="current_user_label">Current User:</string>
+    <string name="progress_title">Processing Task</string>
+    <string name="progress_message">Please wait!</string>
+    <string name="empty_inbox_label">No New Messages!</string>
+    <string name="empty_friends_label">Add Friends To Begin!</string>
+    <string name="menu_edit_friends_label">Edit Friends</string>
+    <string name="error_title">We\'re Sorry!</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_section1">INBOX</string>
+    <string name="title_section2">FRIENDS</string>
+</resources>
