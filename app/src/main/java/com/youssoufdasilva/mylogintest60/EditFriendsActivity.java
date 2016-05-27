@@ -42,8 +42,6 @@ public class EditFriendsActivity extends AppCompatActivity {
         //using the linear layout manager
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
-
         loadFriends();
 
 //        activityList.getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
