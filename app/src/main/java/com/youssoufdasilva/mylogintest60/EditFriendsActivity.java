@@ -1,6 +1,7 @@
 package com.youssoufdasilva.mylogintest60;
 
 import android.app.ProgressDialog;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,9 +9,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.parse.FindCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseRelation;
 import com.parse.ParseUser;
 
 import java.util.List;
@@ -22,6 +28,8 @@ public class EditFriendsActivity extends AppCompatActivity {
     protected RecyclerView mRecyclerView;
     protected ProgressDialog mProgressDialog;
     protected EditFriendsAdapter mAdapter;
+    private ParseRelation<ParseUser> mFriendsRelation;
+    private ParseUser mCurrentUser;
 
 //    private ListActivity activityList = new ListActivity();
 
@@ -30,10 +38,6 @@ public class EditFriendsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_friends);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-//        mRecyclerView.setHasFixedSize(true);
 
         //specifying an adapter
         mAdapter = new EditFriendsAdapter();
@@ -44,8 +48,14 @@ public class EditFriendsActivity extends AppCompatActivity {
 
         loadFriends();
 
-//        activityList.getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
 
     private void loadFriends() {
         //creating progress dialog
@@ -60,17 +70,27 @@ public class EditFriendsActivity extends AppCompatActivity {
         query.setLimit(1000);
         query.findInBackground(new FindCallback<ParseUser>() {
             @Override
-            public void done(List<ParseUser> users, ParseException e) {
+            public void done(final List<ParseUser> users, ParseException e) {
                 mProgressDialog.hide();
-                if (e == null){
+                if (e == null) {
                     //success
 
-                    mAdapter.setUsers(users);
+                    mCurrentUser = ParseUser.getCurrentUser();
+                    mFriendsRelation = mCurrentUser.getRelation(ParseConstants.KEY_FRIENDS_RELATION);
+                    mFriendsRelation.getQuery().findInBackground(new FindCallback<ParseUser>() {
+                        @Override
+                        public void done(List<ParseUser> friends, ParseException e) {
+                            if (e == null) {
+                                //list returned - look for a match
 
-//                    for(ParseUser user : users) {
-//                        mUsers.add(user);
-//                    }
-                    mAdapter.notifyDataSetChanged();
+                                mAdapter.setUsers(users,friends);
+                                mAdapter.notifyDataSetChanged();
+                            } else {
+                                Log.e(TAG, e.getMessage());
+                            }
+                        }
+                    });
+
 
                 } else {
                     //failed
@@ -86,9 +106,11 @@ public class EditFriendsActivity extends AppCompatActivity {
         });
     }
 
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mProgressDialog = null;
     }
+
 }
