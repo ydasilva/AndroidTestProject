@@ -70,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_edit_friends:
-//                Intent friendIntent = new Intent (this, EditFriendsActivity.class);
                 Intent friendIntent = new Intent (this, EditFriendsActivity.class);
+//                Intent friendIntent = new Intent (this, OldEditFriendsActivity.class);
                 startActivity(friendIntent);
                 return true;
             case R.id.action_logout:

@@ -25,4 +25,5 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_section1">INBOX</string>
     <string name="title_section2">FRIENDS</string>
+    <string name="title_activity_edit_friends">Edit Friends</string>
 </resources>

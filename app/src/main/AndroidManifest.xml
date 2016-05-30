@@ -37,9 +37,17 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".EditFriendsActivity"
+            android:name=".OldEditFriendsActivity"
             android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".EditFriendsActivity"
+            android:label="@string/title_activity_edit_friends"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.youssoufdasilva.mylogintest60.MainActivity" />
         </activity>
     </application>
 
