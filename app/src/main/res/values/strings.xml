@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">myLoginTest60</string>
+    <string name="app_name">Ribbity</string>
     <string name="username_hint">Username</string>
     <string name="password_hint">Password</string>
     <string name="loginbutton_hint">Login</string>
@@ -19,11 +19,28 @@
     <string name="menu_edit_friends_label">Edit Friends</string>
     <string name="error_title">We\'re Sorry!</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_main2">Main2Activity</string>
-    <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_section1">INBOX</string>
     <string name="title_section2">FRIENDS</string>
     <string name="title_activity_edit_friends">Edit Friends</string>
+    <string name="title_activity_edit_my_friends">Edit Friends</string>
+
+    <string name="menu_camera_label">Camera</string>
+    <string name="error_external_storage">There was a problem accessing your device\'s external storage.</string>
+    <string name="general_error">Sorry, there was an error!</string>
+    <string name="video_file_size_warning">The selected video must be less than 30MB</string>
+    <string name="error_opening_file">There was a problem with the selected file</string>
+    <string name="error_file_size_too_large">The selected file is too large! Select a new file.</string>
+    <string name="empty_recipient_list_message">Choose some friends first!</string>
+    <string name="menu_send_label">Send</string>
+    <string name="error_selecting_file">There was an error with the file selected. Please select a different file!</string>
+    <string name="success_message">Message Sent!</string>
+    <string name="error_sending_message">There was an error sending your message. Please try again!</string>
+    <string name="error_saving_message_file">Error saving the file</string>
+
+    <string-array name="camera_choices">
+        <item>Take Picture</item>
+        <item>Take Video</item>
+        <item>Choose Picture</item>
+        <item>Choose Video</item>
+    </string-array>
 </resources>

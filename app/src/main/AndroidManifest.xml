@@ -2,8 +2,25 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.youssoufdasilva.mylogintest60">
 
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="23" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".LoginTestApplication"
@@ -39,16 +56,16 @@
         <activity
             android:name=".OldEditFriendsActivity"
             android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".EditFriendsActivity"
-            android:label="@string/title_activity_edit_friends"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.youssoufdasilva.mylogintest60.MainActivity" />
-        </activity>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RecipientsActivity"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>
