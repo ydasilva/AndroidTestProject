@@ -227,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             Intent recipientIntent = new Intent (this, RecipientsActivity.class);
-            recipientIntent.setData(mMediaUri);
+            recipientIntent.setData(mMediaUri); // this is where the media (Picture or video) gets passed to the recipientActivity
 
             String fileType;
             if(requestCode == PICK_PHOTO_REQUEST || requestCode == TAKE_PHOTO_REQUEST){
@@ -237,6 +237,7 @@ public class MainActivity extends AppCompatActivity {
                 fileType = ParseConstants.TYPE_VIDEO;
             }
             recipientIntent.putExtra(ParseConstants.KEY_FILE_TYPE, fileType);
+
             startActivity(recipientIntent);
         }
         else if (resultCode != RESULT_CANCELED){

@@ -71,6 +71,7 @@ public class RecipientsActivity extends ListActivity  {
 
                 if (message == null){
                     mProgressDialog.hide();
+                    Toast.makeText(RecipientsActivity.this, "### Message is NULL! ###", Toast.LENGTH_LONG).show();
                     //error
                     AlertDialog.Builder builder = new AlertDialog.Builder(RecipientsActivity.this);
                     builder.setMessage(getString(R.string.error_selecting_file))
@@ -80,7 +81,7 @@ public class RecipientsActivity extends ListActivity  {
                     dialog.show();
                 }
                 else {
-                    send(message);
+//                    send(message); // the message will be sent when the other thread finishes
                     mProgressDialog.hide();
                     finish();
                 }
@@ -93,7 +94,6 @@ public class RecipientsActivity extends ListActivity  {
         message.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
-                Toast.makeText(RecipientsActivity.this, "About to send message in done", Toast.LENGTH_LONG).show();
                 if (e == null){
                     //success
                     Toast.makeText(RecipientsActivity.this, R.string.success_message, Toast.LENGTH_LONG).show();
@@ -103,6 +103,7 @@ public class RecipientsActivity extends ListActivity  {
                             .setPositiveButton(android.R.string.ok, null);
                     AlertDialog dialog = builder.create();
                     dialog.show();*/
+                    Toast.makeText(RecipientsActivity.this, "Message sent CONFIRMATION !!!", Toast.LENGTH_LONG).show();
                 }
                 else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(RecipientsActivity.this);
@@ -134,14 +135,20 @@ public class RecipientsActivity extends ListActivity  {
                 fileBytes = FileHelper.reduceImageForUpload(fileBytes);
             }
 
-            //Followed this tutorial: http://www.cumulations.com/blogs/8/Problem-with-ParseFile-in-offline-mode
+            String fileName = FileHelper.getFileName(this, mMediaUri, mFileType);
+            final ParseFile file = new ParseFile(fileName, fileBytes);
 
-//            String fileName = FileHelper.getFileName(this, mMediaUri, mFileType);
-//            ParseFile file = new ParseFile(fileName, fileBytes);
 
-//            file.saveInBackground();
+            file.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    message.put(ParseConstants.KEY_FILE, file);
+                    send(message);
+                }
 
-            message.put(ParseConstants.KEY_FILE_BYTES, fileBytes);
+                });
+
+
 
             return message;
         }
