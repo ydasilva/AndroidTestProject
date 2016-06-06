@@ -1,6 +1,5 @@
 package com.youssoufdasilva.mylogintest60;
 
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -18,7 +17,6 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.parse.ParseUser;
 
 import java.io.File;
@@ -42,12 +40,10 @@ public class MainActivity extends AppCompatActivity {
     public static final int MEDIA_TYPE_VIDEO = 5;
 
 
-    public static final int FILE_SIZE_LIMIT = 30 * 1024 * 1024; // 30 MB
+    public static final int FILE_SIZE_LIMIT = 10 * 1024 * 1024; // 10 MB
 
     protected Uri mMediaUri;
-
     protected TextView mCurrentUser;
-
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     /**
@@ -82,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     else {
                         videoIntent.putExtra(MediaStore.EXTRA_OUTPUT, mMediaUri);
-                        videoIntent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 10);
+                        videoIntent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 5); //limit is 5 seconds
                         videoIntent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 0);
                         startActivityForResult(videoIntent,TAKE_VIDEO_REQUEST);
                     }
@@ -195,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 Log.i(TAG, "Media URI: " + mMediaUri);
                 if(requestCode == PICK_VIDEO_REQUEST) {
-                    // make sure the file is less than 30 MB
+                    // make sure the file is less than 10 MB
                     int fileSize = 0;
                     InputStream inputStream = null;
 

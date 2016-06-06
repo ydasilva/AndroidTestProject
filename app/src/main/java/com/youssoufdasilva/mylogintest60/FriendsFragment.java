@@ -55,17 +55,17 @@ public class FriendsFragment extends ListFragment {
                 if (e == null) {
                     mFriends = friends;
 
-                    String[] usernames = new String[mFriends.size()];
+                    String[] usernameArray = new String[mFriends.size()];
 
                     int i = 0;
                     for (ParseUser myUser : mFriends){
-                        usernames[i] = myUser.getUsername();
+                        usernameArray[i] = myUser.getUsername();
                         i++;
                     }
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                             getListView().getContext(),
                             android.R.layout.simple_list_item_1,
-                            usernames);
+                            usernameArray);
 
                     setListAdapter(adapter);
                 }

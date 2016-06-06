@@ -57,15 +57,20 @@
             android:name=".OldEditFriendsActivity"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".EditFriendsActivity"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".RecipientsActivity"
             android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
+        <activity android:name=".ViewImageActivity"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

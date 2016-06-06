@@ -42,6 +42,7 @@ public class RecipientsActivity extends ListActivity  {
     protected Button mSendButton;
     private Uri mMediaUri;
     private String mFileType;
+    private ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +61,16 @@ public class RecipientsActivity extends ListActivity  {
             @Override
             public void onClick(View v) {
 
+                mProgressDialog = new ProgressDialog(RecipientsActivity.this);
+                mProgressDialog.setTitle(getString(R.string.progress_title));
+                mProgressDialog.setMessage(getString(R.string.progress_message));
+                mProgressDialog.setIndeterminate(true);
+                mProgressDialog.show();
+
                 ParseObject message = createMessage();
 
                 if (message == null){
+                    mProgressDialog.hide();
                     //error
                     AlertDialog.Builder builder = new AlertDialog.Builder(RecipientsActivity.this);
                     builder.setMessage(getString(R.string.error_selecting_file))
@@ -73,8 +81,10 @@ public class RecipientsActivity extends ListActivity  {
                 }
                 else {
                     send(message);
+                    mProgressDialog.hide();
                     finish();
                 }
+                mProgressDialog.dismiss();
             }
         });
     }
@@ -87,6 +97,12 @@ public class RecipientsActivity extends ListActivity  {
                 if (e == null){
                     //success
                     Toast.makeText(RecipientsActivity.this, R.string.success_message, Toast.LENGTH_LONG).show();
+                    /*AlertDialog.Builder builder = new AlertDialog.Builder(RecipientsActivity.this);
+                    builder.setMessage(R.string.success_message)
+                            .setTitle("Yay!!")
+                            .setPositiveButton(android.R.string.ok, null);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();*/
                 }
                 else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(RecipientsActivity.this);
@@ -118,18 +134,21 @@ public class RecipientsActivity extends ListActivity  {
                 fileBytes = FileHelper.reduceImageForUpload(fileBytes);
             }
 
-            String fileName = FileHelper.getFileName(this, mMediaUri, mFileType);
-            ParseFile file = new ParseFile(fileName, fileBytes);
+            //Followed this tutorial: http://www.cumulations.com/blogs/8/Problem-with-ParseFile-in-offline-mode
 
-            file.saveInBackground();
-            message.put(ParseConstants.KEY_FILE, file);
+//            String fileName = FileHelper.getFileName(this, mMediaUri, mFileType);
+//            ParseFile file = new ParseFile(fileName, fileBytes);
+
+//            file.saveInBackground();
+
+            message.put(ParseConstants.KEY_FILE_BYTES, fileBytes);
 
             return message;
         }
     }
 
     private ArrayList<String> getRecipientIds() {
-        ArrayList<String> recipientIds = new ArrayList<String>();
+        ArrayList<String> recipientIds = new ArrayList<>();
 
         for (int i = 0; i < getListView().getCount(); i++){
             if (getListView().isItemChecked(i)){

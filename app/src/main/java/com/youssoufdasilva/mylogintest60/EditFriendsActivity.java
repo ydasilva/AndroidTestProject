@@ -58,6 +58,7 @@ public class EditFriendsActivity extends ListActivity {
             @Override
             public void done(List<ParseUser> users, ParseException e) {
                 mProgressDialog.hide();
+                mProgressDialog.dismiss();
 
                 if (e == null){
                     //success
