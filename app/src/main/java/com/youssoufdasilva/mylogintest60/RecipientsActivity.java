@@ -106,12 +106,17 @@ public class RecipientsActivity extends ListActivity  {
                     Toast.makeText(RecipientsActivity.this, "Message sent CONFIRMATION !!!", Toast.LENGTH_LONG).show();
                 }
                 else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(RecipientsActivity.this);
+                    Toast.makeText(RecipientsActivity.this, "MESSAGE NOT SENT !!!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RecipientsActivity.this, e.toString(), Toast.LENGTH_LONG).show();
+
+                    /*AlertDialog.Builder builder = new AlertDialog.Builder(RecipientsActivity.this);
                     builder.setMessage(R.string.error_sending_message)
                             .setTitle(R.string.error_title)
                             .setPositiveButton(android.R.string.ok, null);
                     AlertDialog dialog = builder.create();
                     dialog.show();
+                    dialog.dismiss();
+                    dialog.cancel();*/
                 }
             }
         });
@@ -142,8 +147,14 @@ public class RecipientsActivity extends ListActivity  {
             file.saveInBackground(new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
-                    message.put(ParseConstants.KEY_FILE, file);
-                    send(message);
+                    if (e == null) {
+                        message.put(ParseConstants.KEY_FILE, file);
+                        send(message);
+                    }
+                    else {
+                        Toast.makeText(RecipientsActivity.this, "FILE NOT SAVED!!!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(RecipientsActivity.this, e.toString(), Toast.LENGTH_LONG).show();
+                    }
                 }
 
                 });

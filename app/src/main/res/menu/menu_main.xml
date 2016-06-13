@@ -8,6 +8,11 @@
         android:title="@string/menu_edit_friends_label"
         app:showAsAction="never"/>
     <item
+        android:id="@+id/action_basic_activity"
+        android:orderInCategory="100"
+        android:title="Basic Activity"
+        app:showAsAction="never"/>
+    <item
         android:id="@+id/action_logout"
         android:orderInCategory="100"
         android:title="@string/menu_logout_label"
